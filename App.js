@@ -22,7 +22,10 @@ if (
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
-const BACKGROUND_COLORS = ['#1B1D34', '#2A2A38'];
+const BACKGROUND_COLORS = [
+  '#1B1D34',
+  '#2A2A38'
+];
 
 export default class App extends React.Component {
   state = {
