@@ -59,6 +59,18 @@ export default class Start extends React.Component {
     }).start();
   }
 
+  handlePressStart = async () => {
+    const { onStartGame} = this.props;
+
+    await configureTransition(() => {
+      this.setState({
+        transitionState: State.WillTransitionOut
+      })
+    });
+
+    onStartGame();
+  };
+
   render() {
     const { size, onChangeSize } = this.props;
     const { transitionState } = this.state;
@@ -67,6 +79,7 @@ export default class Start extends React.Component {
     const buttonStyle = { opacity: this.buttonOpacity };
 
     return (
+      transitionState !== State.WillTransitionOut && (
       <View style={styles.container}>
         <View style={styles.logo}>
           <Logo />
@@ -82,10 +95,14 @@ export default class Start extends React.Component {
         )}
         {transitionState !== State.Launching && (
           <Animated.View style={buttonStyle}>
-            <Button title={'Start Game'} onPress={() => {}} />
+            <Button
+              title={'Start Game'}
+              onPress={this.handlePressStart}
+            />
           </Animated.View>
         )}
       </View>
+      )
     );
   }
 }
